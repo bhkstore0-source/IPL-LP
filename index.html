@@ -502,7 +502,17 @@ function finalSubmit() {
       fbq('track', 'Purchase', { value: PRODUCT_PRICE, currency: 'DZD', content_name: PRODUCT_NAME });
     }
     if (typeof ttq !== 'undefined') {
-      ttq.track('PlaceAnOrder', { value: PRODUCT_PRICE, currency: 'DZD', content_name: PRODUCT_NAME });
+      ttq.identify({
+        phone_number: phone,
+      });
+      ttq.track('PlaceAnOrder', {
+        value:        PRODUCT_PRICE,
+        currency:     'DZD',
+        content_id:   'IPL-1000000',
+        content_name: PRODUCT_NAME,
+        content_type: 'product',
+        quantity:     1,
+      });
     }
     const modal = document.getElementById('successModal');
     if (modal) { modal.classList.add('show'); modal.style.display = 'flex'; }
